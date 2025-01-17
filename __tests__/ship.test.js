@@ -1,14 +1,17 @@
 const Ship = require("../ship")
+const Port = require('../port')
+
 
 describe('Ship constructor', () => { 
-        let magna= new Ship('Nice')
+        const nice= new Port('Nice')
+        let magna= new Ship(nice)
 
     it('Ship class can be instantiated',()=>{
         expect(magna).toBeInstanceOf(Object)
     })
 
     it('Ship has a starting port',()=>{
-        expect(magna.startingPort).toBe('Nice')
+        expect(magna.currentPort).toEqual(nice)
     })
 
     it('Ship class have passengers prop set to 0',()=>{
@@ -20,9 +23,15 @@ describe('Ship constructor', () => {
         expect(magna.passengers).toBe(3)
     })
 
-    it('setSail should modify startingPort prop and set it to null',()=>{
+    it('setSail should modify currentPort prop and set it to null',()=>{
         magna.setSail()
-        expect(magna.startingPort).toBeFalsy()
+        expect(magna.currentPort).toBeFalsy()
+    })
+
+    it('dock should modify currentPort prop and set it to passed arg',()=>{
+        const venezia= new Port('Venezia')
+        magna.dock(venezia)
+        expect(magna.currentPort).toBe(venezia)
     })
 
  })

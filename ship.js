@@ -1,7 +1,8 @@
 class Ship {
-    constructor(startingPort) {
-        this.startingPort=startingPort;
+    constructor(currentPort) {
+        this.currentPort=currentPort;
         this.passengers=0;
+        ;
     }
 
     addPassengers(num){
@@ -9,7 +10,12 @@ class Ship {
     }
 
     setSail(){
-        return this.startingPort=null;
+        return this.currentPort=null;
+    }
+
+    dock(dockName){
+        return this.currentPort=dockName;
+
     }
 }
 
