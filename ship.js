@@ -7,6 +7,10 @@ class Ship {
     addPassengers(num){
         return this.passengers += num
     }
+
+    setSail(){
+        return this.startingPort=null;
+    }
 }
 
 module.exports= Ship;

@@ -20,4 +20,9 @@ describe('Ship constructor', () => {
         expect(magna.passengers).toBe(3)
     })
 
+    it('setSail should modify startingPort prop and set it to null',()=>{
+        magna.setSail()
+        expect(magna.startingPort).toBeFalsy()
+    })
+
  })
