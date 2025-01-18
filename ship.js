@@ -2,7 +2,6 @@ class Ship {
     constructor(currentPort) {
         this.currentPort=currentPort;
         this.passengers=0;
-        ;
     }
 
     addPassengers(num){

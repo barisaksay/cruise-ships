@@ -7,11 +7,15 @@ describe('Ship constructor', () => {
         let magna= new Ship(nice)
 
     it('Ship class can be instantiated',()=>{
-        expect(magna).toBeInstanceOf(Object)
+        expect(magna).toBeInstanceOf(Ship)
     })
 
     it('Ship has a starting port',()=>{
         expect(magna.currentPort).toEqual(nice)
+    })
+
+    it('Ships port is instance of Port class ',()=>{
+        expect(magna.currentPort).toBeInstanceOf(Port)
     })
 
     it('Ship class have passengers prop set to 0',()=>{
