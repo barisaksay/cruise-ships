@@ -1,41 +1,41 @@
 const Ship = require("../ship")
 const Port = require('../port')
+const Itinerary = require('../itinerary')
 
 
 describe('Ship constructor', () => { 
-        const nice= new Port('Nice')
-        let magna= new Ship(nice)
+        const nice=new Port('Nice')
+        const monaco=new Port('Monaco')
+        const limassol=new Port('Limassol')
+        const eastMed= new Itinerary([nice,monaco,limassol])
+        let magna= new Ship(eastMed)
 
     it('Ship class can be instantiated',()=>{
         expect(magna).toBeInstanceOf(Ship)
     })
 
     it('Ship has a starting port',()=>{
-        expect(magna.currentPort).toEqual(nice)
+        expect(magna.currentPort.name).toEqual('Nice')
     })
 
     it('Ships port is instance of Port class ',()=>{
         expect(magna.currentPort).toBeInstanceOf(Port)
     })
 
-    it('Ship class have passengers prop set to 0',()=>{
-        expect(magna).toHaveProperty('passengers',0)
-    })
-
-    it('addPassengers should increase passengers prop with given arg',()=>{
-        magna.addPassengers(3)
-        expect(magna.passengers).toBe(3)
-    })
-
     it('setSail should modify currentPort prop and set it to null',()=>{
         magna.setSail()
         expect(magna.currentPort).toBeFalsy()
+        expect(magna.previousPort).toBe(nice)
     })
 
     it('dock should modify currentPort prop and set it to passed arg',()=>{
-        const venezia= new Port('Venezia')
-        magna.dock(venezia)
-        expect(magna.currentPort).toBe(venezia)
+        magna.dock()
+        expect(magna.currentPort).toBe(monaco)
+    })
+
+    it('Ship has previousPort prop null by default',()=>{
+         const newShip= new Ship(eastMed)
+        expect(newShip.previousPort).toBeNull()
     })
 
  })
