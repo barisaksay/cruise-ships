@@ -15,4 +15,6 @@ describe('Itinerary constructor tests', () => {
         expect(eastMed.ports).toEqual([nice,monaco,limassol])
     })
 
+    
+
  })

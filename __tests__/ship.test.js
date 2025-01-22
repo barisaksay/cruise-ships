@@ -6,8 +6,7 @@ const Itinerary = require('../itinerary')
 describe('Ship constructor', () => { 
         const nice=new Port('Nice')
         const monaco=new Port('Monaco')
-        const limassol=new Port('Limassol')
-        const eastMed= new Itinerary([nice,monaco,limassol])
+        const eastMed= new Itinerary([nice,monaco])
         let magna= new Ship(eastMed)
 
     it('Ship class can be instantiated',()=>{
@@ -38,4 +37,16 @@ describe('Ship constructor', () => {
         expect(newShip.previousPort).toBeNull()
     })
 
- })
+
+    it('can\'t sail further than its itinerary', () => {
+        const dover = new Port('Dover');
+        const calais = new Port('Calais');
+        const itinerary = new Itinerary([dover, calais]);
+        const ship = new Ship(itinerary);
+       
+        ship.setSail();
+        ship.dock();
+       
+        expect(() => ship.setSail()).toThrowError('Cannot sail further. End of itinerary');
+      });
+})

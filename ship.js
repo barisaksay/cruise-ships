@@ -6,6 +6,12 @@ class Ship {
     }
 
     setSail(){
+        const itinerary=this.itinerary;
+        const currentPortIndex= itinerary.ports.indexOf(this.currentPort);
+
+        if(currentPortIndex===(itinerary.ports.length-1)){
+            throw Error ('Cannot sail further. End of itinerary')
+        }
         this.previousPort=this.currentPort;
          this.currentPort=null;
          
