@@ -10,5 +10,20 @@ describe('Port class tests', () => {
     it('Port has a name',()=>{
         expect(osaka.name).toBe('osaka')
     })
+
+
+    it('can add a ship to port',()=>{
+        const magna={}
+        osaka.addShip(magna);
+        expect(osaka.ships).toContain(magna)
+    })
+
+
+    it('can remove a ship from port',()=>{
+        const magna={}
+        osaka.addShip(magna)
+        osaka.removeShip(magna);
+        expect(osaka.ships).not.toContain(magna)
+    })
  
  })
