@@ -49,4 +49,34 @@ describe("Ship constructor", () => {
       "Cannot sail further. End of itinerary"
     );
   });
+
+
+  it("ship is added to port on istantiation", () => {
+    const monaco = new Port('monaco');
+    const sampleItinerary= new Itinerary([monaco])
+    const magna= new Ship(sampleItinerary)
+    expect(monaco.ships).toContain(magna);
+  });
+
+  it("ship can dock on different ports", () => {
+    const monaco = new Port('monaco');
+    const nice = new Port('nice');
+    const sampleItinerary= new Itinerary([monaco,nice])
+    const magna= new Ship(sampleItinerary)
+    magna.setSail()
+    magna.dock()
+    expect(nice.ships).toContain(magna);
+  });
+
+  it("ship can set sail", () => {
+    const monaco = new Port('monaco');
+    const nice = new Port('nice');
+    const sampleItinerary= new Itinerary([monaco,nice])
+    const magna= new Ship(sampleItinerary)
+    magna.setSail()
+    expect(magna.currentPort).toBeFalsy();
+    expect(monaco.ships).not.toContain(magna);
+  });
+
+
 });
