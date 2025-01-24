@@ -2,38 +2,52 @@ const Ship = require("../ship");
 const Port = require("../port");
 const Itinerary = require("../itinerary");
 
-describe("Ship constructor", () => {
-  const nice = new Port("Nice");
-  const monaco = new Port("Monaco");
-  const eastMed = new Itinerary([nice, monaco]);
-  let magna = new Ship(eastMed);
+describe("Ship tests", () => {
+  let monaco;
+  let nice;
+  let itinerary;
+  let magna;
+describe('with ports and an itinerary', () => { 
+  // let monaco;
+  // let nice;
+  // let itinerary;
+  // let magna;
+  beforeEach(()=>{
+     monaco = new Port('monaco');
+     nice = new Port('nice');
+     itinerary= new Itinerary([monaco,nice])
+     magna= new Ship(itinerary)
 
+  })
   it("Ship class can be instantiated", () => {
     expect(magna).toBeInstanceOf(Ship);
   });
 
   it("Ship has a starting port", () => {
-    expect(magna.currentPort.name).toEqual("Nice");
+    expect(magna.currentPort.name).toEqual("monaco");
   });
 
+  it("ship can set sail", () => {
+    magna.setSail()
+    expect(magna.currentPort).toBeFalsy();
+    expect(monaco.ships).not.toContain(magna);
+  });
+    
+  it("ship is added to port on istantiation", () => {
+    expect(monaco.ships).toContain(magna);
+  });
+
+ })
+
+ //outer block
   it("Ships port is instance of Port class ", () => {
     expect(magna.currentPort).toBeInstanceOf(Port);
   });
 
-  it("setSail should modify currentPort prop and set it to null", () => {
-    magna.setSail();
-    expect(magna.currentPort).toBeFalsy();
-    expect(magna.previousPort).toBe(nice);
-  });
-
-  it("dock should modify currentPort prop and set it to passed arg", () => {
-    magna.dock();
-    expect(magna.currentPort).toBe(monaco);
-  });
 
   it("Ship has previousPort prop null by default", () => {
-    const newShip = new Ship(eastMed);
-    expect(newShip.previousPort).toBeNull();
+    const newShip = new Ship(itinerary);
+    expect(magna.previousPort).toBeNull();
   });
 
   it("can't sail further than its itinerary", () => {
@@ -50,14 +64,6 @@ describe("Ship constructor", () => {
     );
   });
 
-
-  it("ship is added to port on istantiation", () => {
-    const monaco = new Port('monaco');
-    const sampleItinerary= new Itinerary([monaco])
-    const magna= new Ship(sampleItinerary)
-    expect(monaco.ships).toContain(magna);
-  });
-
   it("ship can dock on different ports", () => {
     const monaco = new Port('monaco');
     const nice = new Port('nice');
@@ -68,15 +74,7 @@ describe("Ship constructor", () => {
     expect(nice.ships).toContain(magna);
   });
 
-  it("ship can set sail", () => {
-    const monaco = new Port('monaco');
-    const nice = new Port('nice');
-    const sampleItinerary= new Itinerary([monaco,nice])
-    const magna= new Ship(sampleItinerary)
-    magna.setSail()
-    expect(magna.currentPort).toBeFalsy();
-    expect(monaco.ships).not.toContain(magna);
-  });
+
 
 
 });

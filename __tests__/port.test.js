@@ -13,14 +13,14 @@ describe('Port class tests', () => {
 
 
     it('can add a ship to port',()=>{
-        const magna={}
+        const magna=jest.fn()
         osaka.addShip(magna);
         expect(osaka.ships).toContain(magna)
     })
 
 
     it('can remove a ship from port',()=>{
-        const magna={}
+        const magna=jest.fn()
         osaka.addShip(magna)
         osaka.removeShip(magna);
         expect(osaka.ships).not.toContain(magna)
