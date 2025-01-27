@@ -1,7 +1,13 @@
 const Port = require('../port')
 
 describe('Port class tests', () => { 
-    let osaka= new Port('osaka')
+    let osaka;
+    let magna;
+    beforeEach(()=>{
+        osaka= new Port('osaka')
+        magna=jest.fn()
+        osaka.addShip(magna);
+    })
 
     it('Port class can be instantiated',()=>{
         expect(osaka).toBeInstanceOf(Object)
@@ -13,15 +19,11 @@ describe('Port class tests', () => {
 
 
     it('can add a ship to port',()=>{
-        const magna=jest.fn()
-        osaka.addShip(magna);
         expect(osaka.ships).toContain(magna)
     })
 
 
-    it('can remove a ship from port',()=>{
-        const magna=jest.fn()
-        osaka.addShip(magna)
+    it('can remove a ship from port',()=>{  
         osaka.removeShip(magna);
         expect(osaka.ships).not.toContain(magna)
     })
