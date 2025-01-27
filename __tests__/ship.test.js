@@ -1,9 +1,8 @@
 const Ship = require("../ship");
-const Port = require("../port");
+const Port = require("../port")
 const Itinerary = require("../itinerary");
 
 describe("Ship tests", () => {
- //mock ship objects
   let monaco;
   let nice;
   let itinerary;
@@ -11,6 +10,7 @@ describe("Ship tests", () => {
 describe('with ports and an itinerary', () => { 
 
   beforeEach(()=>{
+     //mock ship objects
      monaco = {
       addShip: jest.fn(),
       removeShip: jest.fn(),
@@ -23,7 +23,7 @@ describe('with ports and an itinerary', () => {
       name: 'nice',
       ships: []
     };
-     itinerary= new Itinerary([monaco,nice])
+     itinerary= {ports:[monaco,nice]}
      magna= new Ship(itinerary)
   })
   it("Ship class can be instantiated", () => {
@@ -41,34 +41,37 @@ describe('with ports and an itinerary', () => {
 
   });
     
-  it.only("ship is added to port on istantiation", () => {
+  it("ship is added to port on istantiation", () => {
     expect(monaco.addShip).toHaveBeenCalledWith(magna);
 
   });
 
  })
-
- //outer block
-  it("Ships port is instance of Port class ", () => {
-    expect(magna.currentPort).toBeInstanceOf(Port);
-  });
-
-
   it("Ship has previousPort prop null by default", () => {
     const newShip = new Ship(itinerary);
     expect(magna.previousPort).toBeNull();
   });
 
   it("can't sail further than its itinerary", () => {
-    const dover = new Port("Dover");
-    const calais = new Port("Calais");
-    const itinerary = new Itinerary([dover, calais]);
-    const ship = new Ship(itinerary);
+    monaco = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'monaco',
+      ships: []
+    };
+     nice = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'nice',
+      ships: []
+    };
+     itinerary= new Itinerary([monaco,nice])
+     magna= new Ship(itinerary)
 
-    ship.setSail();
-    ship.dock();
+     magna.setSail();
+     magna.dock();
 
-    expect(() => ship.setSail()).toThrowError(
+    expect(() => magna.setSail()).toThrowError(
       "Cannot sail further. End of itinerary"
     );
   });
@@ -86,8 +89,8 @@ describe('with ports and an itinerary', () => {
       name: 'nice',
       ships: []
     };
-     itinerary= new Itinerary([monaco,nice])
-     magna= new Ship(itinerary)
+    itinerary= {ports:[monaco,nice]}
+    magna= new Ship(itinerary)
     magna.setSail()
     magna.dock()
     expect(nice.addShip).toHaveBeenCalledWith(magna);
