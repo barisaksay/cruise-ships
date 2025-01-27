@@ -1,5 +1,4 @@
 const Itinerary = require("../itinerary")
-const Port = require('../port')
 
 describe('Itinerary constructor tests', () => { 
         const nice= jest.fn()

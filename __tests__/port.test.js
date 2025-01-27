@@ -5,7 +5,7 @@ describe('Port class tests', () => {
     let magna;
     beforeEach(()=>{
         osaka= new Port('osaka')
-        magna=jest.fn()
+        magna=jest.fn() //not using Ship class but mock function.
         osaka.addShip(magna);
     })
 

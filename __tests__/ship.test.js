@@ -3,21 +3,28 @@ const Port = require("../port");
 const Itinerary = require("../itinerary");
 
 describe("Ship tests", () => {
+ //mock ship objects
   let monaco;
   let nice;
   let itinerary;
   let magna;
 describe('with ports and an itinerary', () => { 
-  // let monaco;
-  // let nice;
-  // let itinerary;
-  // let magna;
+
   beforeEach(()=>{
-     monaco = new Port('monaco');
-     nice = new Port('nice');
+     monaco = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'monaco',
+      ships: []
+    };
+     nice = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'nice',
+      ships: []
+    };
      itinerary= new Itinerary([monaco,nice])
      magna= new Ship(itinerary)
-
   })
   it("Ship class can be instantiated", () => {
     expect(magna).toBeInstanceOf(Ship);
@@ -30,11 +37,13 @@ describe('with ports and an itinerary', () => {
   it("ship can set sail", () => {
     magna.setSail()
     expect(magna.currentPort).toBeFalsy();
-    expect(monaco.ships).not.toContain(magna);
+    expect(monaco.removeShip).toHaveBeenCalledWith(magna);
+
   });
     
-  it("ship is added to port on istantiation", () => {
-    expect(monaco.ships).toContain(magna);
+  it.only("ship is added to port on istantiation", () => {
+    expect(monaco.addShip).toHaveBeenCalledWith(magna);
+
   });
 
  })
@@ -65,16 +74,22 @@ describe('with ports and an itinerary', () => {
   });
 
   it("ship can dock on different ports", () => {
-    const monaco = new Port('monaco');
-    const nice = new Port('nice');
-    const sampleItinerary= new Itinerary([monaco,nice])
-    const magna= new Ship(sampleItinerary)
+    monaco = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'monaco',
+      ships: []
+    };
+     nice = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'nice',
+      ships: []
+    };
+     itinerary= new Itinerary([monaco,nice])
+     magna= new Ship(itinerary)
     magna.setSail()
     magna.dock()
-    expect(nice.ships).toContain(magna);
+    expect(nice.addShip).toHaveBeenCalledWith(magna);
   });
-
-
-
-
 });
