@@ -1,4 +1,4 @@
-const Port = require('../port')
+const Port = require('../src/port')
 
 describe('Port class tests', () => { 
     let osaka;

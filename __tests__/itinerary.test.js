@@ -1,4 +1,4 @@
-const Itinerary = require("../itinerary")
+const Itinerary = require("../src/itinerary")
 
 describe('Itinerary constructor tests', () => { 
         const nice= jest.fn()

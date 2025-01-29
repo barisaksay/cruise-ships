@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cruise Ships</title>
+    <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="viewport">
+      <div id="ports">
+      </div>
+      <div id="ship"></div>
+    </div>
+
+
+
+
+
+
+
+    <script src="src/controller.js"></script>
+    <script src="src/port.js"></script>
+    <script src="src/itinerary.js"></script>
+    <script src="src/ship.js"></script>
+
+    <script>
+      const controller = new Controller();
+     const itinerary = new Itinerary([
+      new Port("Porto"),
+      new Port("Nice"),
+      new Port ("Sicily")
+     ])
+
+     const magna=new Ship(itinerary)
+     controller.renderPorts(itinerary.ports)
+     controller.renderShip(magna)
+
+    </script>
+</body>
+
+
+</html>

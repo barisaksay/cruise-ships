@@ -1,6 +1,6 @@
-const Ship = require("../ship");
-const Port = require("../port")
-const Itinerary = require("../itinerary");
+const Ship = require("../src/ship");
+const Port = require("../src/port")
+const Itinerary = require("../src/itinerary");
 
 describe("Ship tests", () => {
   let monaco;
